@@ -7,12 +7,11 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DEFAULT_TIMEOUT=120 
 
 WORKDIR /app
-# Change the permissions of the /app directory
-RUN chmod 777 /app
+
 # Copy the .deb file
 COPY pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb /app/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb
 # Install the .deb file using dpkg
-RUN dpkg -i pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb
+RUN dpkg -i /app/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb
 RUN apt install -f 
 
 COPY requirements.txt requirements.txt
