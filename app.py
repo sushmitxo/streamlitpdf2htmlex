@@ -13,9 +13,9 @@ uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 if uploaded_file is not None:
     # Get the file name
     file_name = uploaded_file.name
-    # Create a file path in the app directory
-    file_path = os.path.join("/app", file_name)
-    # Save the file to the app directory
+    # Create a file path in the /tmp directory
+    file_path = os.path.join("/tmp", file_name)
+    # Save the file to the /tmp directory
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     # Run the pdf2htmlEX command
