@@ -11,17 +11,21 @@ uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
 # Check if a file is uploaded
 if uploaded_file is not None:
+    # Get the file name
+    file_name = uploaded_file.name
+    # Create a file path in the app directory
+    file_path = os.path.join("/app", file_name)
     # Save the file to the app directory
-    with open("app/test.pdf", "wb") as f:
+    with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     # Run the pdf2htmlEX command
-    os.system("pdf2htmlEX --zoom 1.3 app/test.pdf")
+    os.system(f"pdf2htmlEX --zoom 1.3 {file_path}")
     # Read the output html file
-    with open("app/test.html", "rb") as f:
+    with open(f"{file_path}.html", "rb") as f:
         html_data = f.read()
     # Encode the html file to base64
     b64 = base64.b64encode(html_data).decode()
     # Create a download link for the html file
-    href = f'<a href="data:file/html;base64,{b64}" download="test.html">Download HTML file</a>'
+    href = f'<a href="data:file/html;base64,{b64}" download="{file_name}.html">Download HTML file</a>'
     # Display the download link
     st.markdown(href, unsafe_allow_html=True)
