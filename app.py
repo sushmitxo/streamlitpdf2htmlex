@@ -13,7 +13,7 @@ uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 # Check if a file is uploaded
 if uploaded_file is not None:
     # Create a temporary file with delete=False
-    with NamedTemporaryFile(dir="/tmp", suffix=".pdf", delete=False) as f:
+    with NamedTemporaryFile(dir="/app", suffix=".pdf", delete=False) as f:
         # Write the uploaded file to the temporary file
         f.write(uploaded_file.getbuffer())
         # Get the file name and path
